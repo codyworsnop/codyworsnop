@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <clipPath id="dome"><path d="M106,310 A150,150 0 0 1 406,310 Z"/></clipPath>
+    <clipPath id="body"><rect x="116" y="318" width="280" height="300"/></clipPath>
+  </defs>
+  <rect width="512" height="512" fill="#5d57f8"/>
+  <g transform="translate(-51.2,-122) scale(1.2)">
+  <!-- body -->
+  <g clip-path="url(#body)">
+    <rect x="116" y="318" width="140" height="300" fill="#eceef2"/>
+    <rect x="256" y="318" width="140" height="300" fill="#d4d7de"/>
+    <rect x="150" y="345" width="40" height="300" rx="6" fill="#2f4fa8"/>
+    <rect x="322" y="345" width="40" height="300" rx="6" fill="#263f8a"/>
+    <rect x="214" y="345" width="84" height="22" rx="5" fill="#2f4fa8"/>
+    <rect x="214" y="380" width="84" height="56" rx="6" fill="#9aa0ab"/>
+    <rect x="224" y="390" width="64" height="7" rx="3" fill="#6d7380"/>
+    <rect x="224" y="404" width="64" height="7" rx="3" fill="#6d7380"/>
+    <rect x="224" y="418" width="64" height="7" rx="3" fill="#6d7380"/>
+    <rect x="214" y="450" width="84" height="200" rx="6" fill="#2f4fa8"/>
+  </g>
+  <!-- neck ring -->
+  <rect x="110" y="304" width="292" height="18" rx="4" fill="#7c828e"/>
+  <!-- dome -->
+  <g clip-path="url(#dome)">
+    <rect x="100" y="150" width="156" height="170" fill="#d3d6dd"/>
+    <rect x="256" y="150" width="156" height="170" fill="#b9bdc7"/>
+    <!-- top cap -->
+    <rect x="216" y="150" width="80" height="34" fill="#2f4fa8"/>
+    <!-- upper panel row -->
+    <rect x="150" y="200" width="44" height="34" rx="4" fill="#2f4fa8"/>
+    <rect x="318" y="200" width="44" height="34" rx="4" fill="#263f8a"/>
+    <!-- lower blue band -->
+    <rect x="100" y="262" width="156" height="28" fill="#2f4fa8"/>
+    <rect x="256" y="262" width="156" height="28" fill="#263f8a"/>
+    <rect x="192" y="262" width="22" height="28" fill="#d3d6dd"/>
+    <rect x="298" y="262" width="22" height="28" fill="#b9bdc7"/>
+  </g>
+  <!-- main eye -->
+  <circle cx="256" cy="222" r="30" fill="#2b2d33"/>
+  <circle cx="256" cy="222" r="19" fill="#141519"/>
+  <circle cx="248" cy="214" r="6" fill="#4a5060"/>
+  <!-- holoprojector -->
+  <circle cx="340" cy="252" r="9" fill="#7c828e"/>
+  <circle cx="340" cy="252" r="4" fill="#2b2d33"/>
+  <!-- indicator lights -->
+  <circle cx="203" cy="276" r="7" fill="#e5484d"/>
+  <circle cx="309" cy="276" r="5" fill="#5fb3f5"/>
+</g>
+</svg>

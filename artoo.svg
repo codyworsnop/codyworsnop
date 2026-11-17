@@ -1,49 +1,93 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
+    <!-- paper layer: slightly wobbly cut edge + soft drop shadow -->
+    <filter id="paper" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="wob"/>
+      <feDisplacementMap in="SourceGraphic" in2="wob" scale="3.5" result="cut"/>
+      <feGaussianBlur in="cut" stdDeviation="0.4" result="soft"/>
+      <feDropShadow in="soft" dx="0" dy="4" stdDeviation="3.5" flood-color="#1a1440" flood-opacity="0.4"/>
+    </filter>
+    <filter id="paperSm" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9" result="wob"/>
+      <feDisplacementMap in="SourceGraphic" in2="wob" scale="2.5" result="cut"/>
+      <feDropShadow in="cut" dx="0" dy="2.5" stdDeviation="2" flood-color="#10132a" flood-opacity="0.45"/>
+    </filter>
+    <!-- paper fibre texture -->
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="2" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1.4 -0.45"/>
+    </filter>
+    <filter id="blotch" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="7"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 -0.35"/>
+    </filter>
     <clipPath id="dome"><path d="M106,310 A150,150 0 0 1 406,310 Z"/></clipPath>
     <clipPath id="body"><rect x="116" y="318" width="280" height="300"/></clipPath>
+    <linearGradient id="vign" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.12"/>
+    </linearGradient>
   </defs>
+
   <rect width="512" height="512" fill="#5d57f8"/>
+
   <g transform="translate(-51.2,-122) scale(1.2)">
-  <!-- body -->
-  <g clip-path="url(#body)">
-    <rect x="116" y="318" width="140" height="300" fill="#eceef2"/>
-    <rect x="256" y="318" width="140" height="300" fill="#d4d7de"/>
-    <rect x="150" y="345" width="40" height="300" rx="6" fill="#2f4fa8"/>
-    <rect x="322" y="345" width="40" height="300" rx="6" fill="#263f8a"/>
-    <rect x="214" y="345" width="84" height="22" rx="5" fill="#2f4fa8"/>
-    <rect x="214" y="380" width="84" height="56" rx="6" fill="#9aa0ab"/>
-    <rect x="224" y="390" width="64" height="7" rx="3" fill="#6d7380"/>
-    <rect x="224" y="404" width="64" height="7" rx="3" fill="#6d7380"/>
-    <rect x="224" y="418" width="64" height="7" rx="3" fill="#6d7380"/>
-    <rect x="214" y="450" width="84" height="200" rx="6" fill="#2f4fa8"/>
+    <!-- body base sheet -->
+    <g filter="url(#paper)">
+      <rect x="116" y="318" width="140" height="300" fill="#eceef2"/>
+      <rect x="256" y="318" width="140" height="300" fill="#d4d7de"/>
+    </g>
+    <!-- body panels (each its own cut piece) -->
+    <g clip-path="url(#body)">
+      <rect filter="url(#paperSm)" x="150" y="345" width="40" height="300" rx="6" fill="#2f4fa8"/>
+      <rect filter="url(#paperSm)" x="322" y="345" width="40" height="300" rx="6" fill="#263f8a"/>
+      <rect filter="url(#paperSm)" x="214" y="345" width="84" height="22" rx="5" fill="#2f4fa8"/>
+      <rect filter="url(#paperSm)" x="214" y="380" width="84" height="56" rx="6" fill="#9aa0ab"/>
+      <g filter="url(#paperSm)" fill="#6d7380">
+        <rect x="224" y="390" width="64" height="7" rx="3"/>
+        <rect x="224" y="404" width="64" height="7" rx="3"/>
+        <rect x="224" y="418" width="64" height="7" rx="3"/>
+      </g>
+      <rect filter="url(#paperSm)" x="214" y="450" width="84" height="200" rx="6" fill="#2f4fa8"/>
+    </g>
+
+    <!-- neck ring -->
+    <rect filter="url(#paper)" x="110" y="304" width="292" height="18" rx="4" fill="#7c828e"/>
+
+    <!-- dome sheet -->
+    <g filter="url(#paper)">
+      <g clip-path="url(#dome)">
+        <rect x="100" y="150" width="156" height="170" fill="#d3d6dd"/>
+        <rect x="256" y="150" width="156" height="170" fill="#b9bdc7"/>
+      </g>
+    </g>
+    <!-- dome panels -->
+    <g clip-path="url(#dome)">
+      <rect filter="url(#paperSm)" x="216" y="140" width="80" height="44" rx="4" fill="#2f4fa8"/>
+      <rect filter="url(#paperSm)" x="150" y="200" width="44" height="34" rx="4" fill="#2f4fa8"/>
+      <rect filter="url(#paperSm)" x="318" y="200" width="44" height="34" rx="4" fill="#263f8a"/>
+      <g filter="url(#paperSm)">
+        <rect x="100" y="262" width="92" height="28" fill="#2f4fa8"/>
+        <rect x="214" y="262" width="42" height="28" fill="#2f4fa8"/>
+        <rect x="256" y="262" width="42" height="28" fill="#263f8a"/>
+        <rect x="320" y="262" width="92" height="28" fill="#263f8a"/>
+      </g>
+    </g>
+
+    <!-- main eye: stacked paper circles -->
+    <circle filter="url(#paperSm)" cx="256" cy="222" r="30" fill="#2b2d33"/>
+    <circle filter="url(#paperSm)" cx="256" cy="222" r="19" fill="#141519"/>
+    <circle filter="url(#paperSm)" cx="248" cy="214" r="6" fill="#4a5060"/>
+    <!-- holoprojector -->
+    <circle filter="url(#paperSm)" cx="340" cy="252" r="9" fill="#7c828e"/>
+    <circle filter="url(#paperSm)" cx="340" cy="252" r="4" fill="#2b2d33"/>
+    <!-- lights -->
+    <circle filter="url(#paperSm)" cx="203" cy="276" r="7" fill="#e5484d"/>
+    <circle filter="url(#paperSm)" cx="309" cy="276" r="5" fill="#5fb3f5"/>
   </g>
-  <!-- neck ring -->
-  <rect x="110" y="304" width="292" height="18" rx="4" fill="#7c828e"/>
-  <!-- dome -->
-  <g clip-path="url(#dome)">
-    <rect x="100" y="150" width="156" height="170" fill="#d3d6dd"/>
-    <rect x="256" y="150" width="156" height="170" fill="#b9bdc7"/>
-    <!-- top cap -->
-    <rect x="216" y="150" width="80" height="34" fill="#2f4fa8"/>
-    <!-- upper panel row -->
-    <rect x="150" y="200" width="44" height="34" rx="4" fill="#2f4fa8"/>
-    <rect x="318" y="200" width="44" height="34" rx="4" fill="#263f8a"/>
-    <!-- lower blue band -->
-    <rect x="100" y="262" width="156" height="28" fill="#2f4fa8"/>
-    <rect x="256" y="262" width="156" height="28" fill="#263f8a"/>
-    <rect x="192" y="262" width="22" height="28" fill="#d3d6dd"/>
-    <rect x="298" y="262" width="22" height="28" fill="#b9bdc7"/>
-  </g>
-  <!-- main eye -->
-  <circle cx="256" cy="222" r="30" fill="#2b2d33"/>
-  <circle cx="256" cy="222" r="19" fill="#141519"/>
-  <circle cx="248" cy="214" r="6" fill="#4a5060"/>
-  <!-- holoprojector -->
-  <circle cx="340" cy="252" r="9" fill="#7c828e"/>
-  <circle cx="340" cy="252" r="4" fill="#2b2d33"/>
-  <!-- indicator lights -->
-  <circle cx="203" cy="276" r="7" fill="#e5484d"/>
-  <circle cx="309" cy="276" r="5" fill="#5fb3f5"/>
-</g>
+
+  <!-- paper texture over everything -->
+  <rect width="512" height="512" filter="url(#blotch)" opacity="0.25" style="mix-blend-mode:soft-light"/>
+  <rect width="512" height="512" filter="url(#grain)" opacity="0.35" style="mix-blend-mode:multiply"/>
+  <rect width="512" height="512" fill="url(#vign)"/>
 </svg>
